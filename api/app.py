@@ -1,15 +1,11 @@
 from flask import Flask, request
 import openai
 
-import speech_recognition as sr 
-
-from dotenv import load_dotenv
+import speech_recognition as sr
 import io
 import os
 import json
 import base64
-
-load_dotenv()
 
 app = Flask(__name__)
 

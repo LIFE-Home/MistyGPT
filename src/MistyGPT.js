@@ -33,7 +33,7 @@ function _VoiceRecord(data) {
 function sendAudio(data) {
     var audio = data.Result.Base64
 
-    var url = "https://31b3-192-17-168-86.ngrok-free.app/generate-response";
+    var url = "https://3dae-192-17-168-86.ngrok-free.app/generate-response";
     misty.SendExternalRequest("POST", url, null, null, JSON.stringify({"audio": audio}), false, false, null, "application/json");
 }
 
