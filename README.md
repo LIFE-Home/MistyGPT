@@ -56,3 +56,7 @@
 - When adding a new guide phrase, add a new key-value pair to the JSON file, where the key is the guide phrase to be detected, and the value is the associated prompt. If you wish to substitute the user input at any point in the prompt, use `{prompt}` in the appropriate location
 
 - Commit the code and push it to GitHub, and then sync the code in the hosting fork to reflect the change in the skill
+
+### Contributors
+
+- Srivishnu Vusirikala ([@vsmart-06](https://github.com/vsmart-06))
