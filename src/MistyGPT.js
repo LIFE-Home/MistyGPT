@@ -33,7 +33,7 @@ function _VoiceRecord(data) {
 function sendAudio(data) {
     var audio = data.Result.Base64
 
-    var url = "https://misty-gpt.vercel.app/generate-response";
+    var url = "https://misty-gpt-zeta.vercel.app/generate-response";
     misty.SendExternalRequest("POST", url, null, null, JSON.stringify({"audio": audio}), false, false, null, "application/json");
 }
 
