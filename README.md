@@ -33,11 +33,11 @@
 
 ### Hosting notes
 
-- The API is currently hosted on [Vercel](https://misty-gpt-zeta.vercel.app/)
+- The API is currently hosted on [Vercel](https://vercel.com/life-homes-projects/misty-gpt)
 
 - The repository used for the hosting is a fork of this repository and is located [here](https://github.com/LIFE-Home/MistyGPT)
 
-- The API URL for sending requests is located [here](https://misty-gpt-zeta.vercel.app/)
+- The API URL for sending requests is located [here](https://misty-gpt-zeta.vercel.app)
 
 - Whenever a change is made to this repository, especially if a change is made to the API, the hosting fork must be synced to the repository for the changes to be reflected
 
