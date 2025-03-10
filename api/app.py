@@ -33,6 +33,7 @@ def answer_prompt(prompt):
                 "content": f"You are the Misty 2 Robot and your primary purpose is to support as a socially assistive robot for people of all ages and abilities. Using this context, provide a response to '{prompt}'. You do not have to introduce yourself. If you do not understand the provided question, reply with 'Sorry, I didn't get that. Can you say that again?'. Unless the question is objective without requiring much elaboration, make your response at most 5 sentences long, but do not go below 3 sentences."
             }
         ]
+        print("Unguided response")
     
     else:
             messages = [
@@ -41,6 +42,7 @@ def answer_prompt(prompt):
                     "content": message
                 }
             ]
+            print("Guided response")
 
     response = openai_client.chat.completions.create(
         model = "gpt-4o-mini",
