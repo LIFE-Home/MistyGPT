@@ -43,9 +43,9 @@
 
 ### Using the skill
 
-- To run the skill, visit the **Skill Management** section of the Misty dashboard and select the **Start** option for **MistyGPT**
+- To run the skill, visit the **Programming > Skill Management** section of the Misty dashboard and select the **Start** option for **MistyGPT**
 
-- Prefix your query with **Hey, Misty**, wait till you hear a chime and a glowing blue LED, and then ask your query
+- Prefix your query with **Hey, Misty**, wait till you hear a chime and a glowing blue LED from its helmet, and then ask your query
 
 ### Modifying the skill
 
