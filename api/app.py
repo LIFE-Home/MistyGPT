@@ -69,7 +69,8 @@ def generate_response():
         print("Output:", output)
     except Exception as e:
         print("Error:", e)
-        return {"error": str(e.with_traceback(e.__traceback__))}
+        print("Traceback:", str(e.with_traceback(e.__traceback__)))
+        output = "Sorry, I didn't get that. Can you say that again?"
 
     return {"message": output}
 
