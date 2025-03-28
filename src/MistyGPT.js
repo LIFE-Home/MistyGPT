@@ -1,3 +1,5 @@
+var dialogue = false;
+
 function startListening() {
     misty.RegisterEvent("KeyPhraseRecognized","KeyPhraseRecognized", 10, false);
 
@@ -35,7 +37,7 @@ function sendAudio(data) {
     var audio = data.Result.Base64;
 
     var url = "https://misty-gpt-zeta.vercel.app/generate-response";
-    misty.SendExternalRequest("POST", url, null, null, JSON.stringify({"audio": audio, "dialogue": dialogue}), false, false, null, "application/json");
+    misty.SendExternalRequest("POST", url, null, null, JSON.stringify({"audio": audio}), false, false, null, "application/json");
 }
 
 function _SendExternalRequest(data) {
@@ -51,7 +53,13 @@ function _SendExternalRequest(data) {
     }
     
     if (dialogue) {
-        _KeyPhraseRecognized();
+        misty.AddReturnProperty("VoiceRecord", "Filename");
+        misty.AddReturnProperty("VoiceRecord", "Success");
+        misty.AddReturnProperty("VoiceRecord", "ErrorCode");
+        misty.AddReturnProperty("VoiceRecord", "ErrorMessage");
+        misty.RegisterEvent("VoiceRecord", "VoiceRecord", 10, false);
+        
+        misty.CaptureSpeech(false, true, 7500, 5000);
     }
     else {
         startListening();
@@ -59,4 +67,3 @@ function _SendExternalRequest(data) {
 }
 
 startListening();
-dialogue = true;
