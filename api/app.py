@@ -65,6 +65,10 @@ def generate_response():
     try:
         msg = rec.recognize_google(data).lower()
         print("Input:", msg)
+        if ("dialogue" in msg or "dialog" in msg):
+            print("Dialogue mode toggled")
+            return {"dialogue": True}
+
         output = answer_prompt(msg)
         print("Output:", output)
     except Exception as e:
