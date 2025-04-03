@@ -1,5 +1,3 @@
-misty.Set("dialogue", false);
-
 function startListening() {
     misty.RegisterEvent("KeyPhraseRecognized","KeyPhraseRecognized", 10, false);
 
@@ -42,44 +40,14 @@ function sendAudio(data) {
 
 function _SendExternalRequest(data) {
     var response = JSON.parse(data.Result.ResponseObject.Data);
-    if ("dialogue" in response) {
-        misty.Set("dialogue", !misty.Get("dialogue"));
-
-        if (misty.Get("dialogue")) {
-            misty.AddReturnProperty("VoiceRecord", "Filename");
-            misty.AddReturnProperty("VoiceRecord", "Success");
-            misty.AddReturnProperty("VoiceRecord", "ErrorCode");
-            misty.AddReturnProperty("VoiceRecord", "ErrorMessage");
-            misty.RegisterEvent("VoiceRecord", "VoiceRecord", 10, false);
-            
-            misty.CaptureSpeech(false, true, 7500, 5000);
-        }
-    }
-    else if ("message" in response) {
-        misty.RegisterEvent("TextToSpeechComplete", "TextToSpeechComplete", 0, false);
-
-        misty.Speak(response.message, true, "Message");
+    if ("message" in response) {
+        misty.Speak(response.message, true);
     }
     else {
-        misty.RegisterEvent("TextToSpeechComplete", "TextToSpeechComplete", 0, false);
+        misty.Speak("Sorry, I didn't get that. Can you say that again?", true);
+    }
 
-        misty.Speak("Sorry, I didn't get that. Can you say that again?", true, "Error");
-    }
-}
-
-function _TextToSpeechComplete() {
-    if (misty.Get("dialogue")) {
-        misty.AddReturnProperty("VoiceRecord", "Filename");
-        misty.AddReturnProperty("VoiceRecord", "Success");
-        misty.AddReturnProperty("VoiceRecord", "ErrorCode");
-        misty.AddReturnProperty("VoiceRecord", "ErrorMessage");
-        misty.RegisterEvent("VoiceRecord", "VoiceRecord", 10, false);
-        
-        misty.CaptureSpeech(false, true, 7500, 5000);
-    }
-    else {
-        startListening();
-    }
+    startListening();
 }
 
 startListening();
