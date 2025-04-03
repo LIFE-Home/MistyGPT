@@ -1,13 +1,16 @@
 from flask import Flask, request
 import openai
-
 import speech_recognition as sr
+
 import io
 import os
 import json
 import base64
+import math
 
 app = Flask(__name__)
+
+grid = {"living": (0, 0), "kitchen": (0, 1), "bathroom": (1, 0), "study": (1, 1)}
 
 @app.route("/")
 def index():
@@ -58,6 +61,7 @@ def generate_response():
     audio = request.get_json()
     
     file = io.BytesIO(base64.b64decode(audio["audio"]))
+    position = eval(audio["position"])
 
     with sr.AudioFile(file) as audio:
         data = rec.record(audio)
@@ -65,6 +69,42 @@ def generate_response():
     try:
         msg = rec.recognize_google(data).lower()
         print("Input:", msg)
+
+        if "go" in msg:
+            if "living" in msg:
+                final = grid["living"]
+            elif "bathroom" in msg:
+                final = grid["bathroom"]
+            elif "study" in msg:
+                final = grid["study"]
+            elif "kitchen" in msg:
+                final = grid["kitchen"]
+
+
+            d = math.dist(position, final)
+            x = final[0]-position[0]
+            y = final[1]-position[1]
+
+            a1 = math.degrees(math.acos(x/d))
+            a2 = math.degrees(math.asin(y/d))
+
+            if a1 * a2 > 0:
+                if a1 > 0:
+                    a = a1
+                else:
+                    a = 360 - a1
+            else:
+                if a1 > 0:
+                    a = 360 - a1
+                else:
+                    a = a1
+            
+            a = 90-a
+            
+            print("Movement command")
+
+            return {"position": str(final), "bearing": a, "distance": d, "move": True}
+
         output = answer_prompt(msg)
         print("Output:", output)
     except Exception as e:
@@ -72,7 +112,7 @@ def generate_response():
         print("Traceback:", str(e.with_traceback(e.__traceback__)))
         output = "Sorry, I didn't get that. Can you say that again?"
 
-    return {"message": output}
+    return {"message": output, "move": False}
 
 if __name__ == "__main__":
     app.run(debug = True)

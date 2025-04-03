@@ -1,3 +1,6 @@
+misty.Set("position", "(0, 0)");
+misty.Set("bearing", 0);
+
 function startListening() {
     misty.RegisterEvent("KeyPhraseRecognized","KeyPhraseRecognized", 10, false);
 
@@ -6,7 +9,7 @@ function startListening() {
     misty.Debug("Started listening for key phrase");
 }
 
-function _KeyPhraseRecognized() { 
+function _KeyPhraseRecognized() {
     misty.AddReturnProperty("VoiceRecord", "Filename");
     misty.AddReturnProperty("VoiceRecord", "Success");
     misty.AddReturnProperty("VoiceRecord", "ErrorCode");
@@ -35,14 +38,24 @@ function sendAudio(data) {
     var audio = data.Result.Base64;
 
     var url = "https://misty-gpt-zeta.vercel.app/generate-response";
-    misty.SendExternalRequest("POST", url, null, null, JSON.stringify({"audio": audio}), false, false, null, "application/json");
+    misty.SendExternalRequest("POST", url, null, null, JSON.stringify({"audio": audio, "position": misty.Get("position"), "bearing": misty.Get("bearing")}), false, false, null, "application/json");
 }
 
 function _SendExternalRequest(data) {
     var response = JSON.parse(data.Result.ResponseObject.Data);
-    if ("message" in response) {
+
+    if (response["move"]) {
+        misty.Set("position", response["position"]);
+        misty.Set("bearing", response["bearing"]);
+        
+        misty.DriveArc(360-response["angle"], 0, 3000, false);
+        //misty.DriveHeading(response["angle"], response["distance"], 3000, false);
+    }
+
+    else if ("message" in response) {
         misty.Speak(response.message, true);
     }
+    
     else {
         misty.Speak("Sorry, I didn't get that. Can you say that again?", true);
     }
