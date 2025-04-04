@@ -48,8 +48,9 @@ function _SendExternalRequest(data) {
         misty.Set("position", response["position"]);
         misty.Set("bearing", response["bearing"]);
         
-        misty.DriveArc(360-response["angle"], 0, 3000, false);
-        //misty.DriveHeading(response["angle"], response["distance"], 3000, false);
+        misty.DriveArc((360-response["bearing"])%360, 0, 3000, false);
+        misty.Pause(5000);
+        misty.DriveHeading((360-response["bearing"])%360, response["distance"], 3000, false);
     }
 
     else if ("message" in response) {

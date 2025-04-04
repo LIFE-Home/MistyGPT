@@ -102,6 +102,7 @@ def generate_response():
             a = 90-a
             
             print("Movement command")
+            print({"position": str(final), "bearing": a, "distance": d, "move": True})
 
             return {"position": str(final), "bearing": a, "distance": d, "move": True}
 
@@ -112,6 +113,8 @@ def generate_response():
         print("Traceback:", str(e.with_traceback(e.__traceback__)))
         output = "Sorry, I didn't get that. Can you say that again?"
 
+    print({"message": output, "move": False})
+    
     return {"message": output, "move": False}
 
 if __name__ == "__main__":
