@@ -10,7 +10,7 @@ import math
 
 app = Flask(__name__)
 
-grid = {"living": (0, 0), "kitchen": (0, 1), "bathroom": (1, 0), "study": (1, 1)}
+grid = {"living room": (0, 0), "kitchen": (0, 1), "bathroom": (1, 0), "study": (1, 1)}
 
 @app.route("/")
 def index():
@@ -71,7 +71,7 @@ def generate_response():
         print("Input:", msg)
 
         if "go" in msg:
-            if "living room" in msg:
+            if "living" in msg:
                 loc = "living room"
             elif "bathroom" in msg:
                 loc = "bathroom"
