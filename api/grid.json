@@ -1,0 +1,8 @@
+{
+    "grid": {
+        "living room": [0, 0],
+        "kitchen": [0, 1],
+        "bathroom": [1, 0],
+        "study": [1, 1]
+    }
+}

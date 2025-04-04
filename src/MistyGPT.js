@@ -1,4 +1,4 @@
-misty.Set("position", "(0, 0)");
+misty.Set("position", "[0, 0]");
 misty.Set("bearing", 0);
 
 function startListening() {

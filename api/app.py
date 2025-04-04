@@ -10,8 +10,6 @@ import math
 
 app = Flask(__name__)
 
-grid = {"living room": (0, 0), "kitchen": (0, 1), "bathroom": (1, 0), "study": (1, 1)}
-
 @app.route("/")
 def index():
     return '<marquee direction="right"><h1>The MistyGPT API is up and running!</h1></marquee>'
@@ -79,6 +77,8 @@ def generate_response():
                 loc = "study"
             else:
                 loc = "kitchen"
+
+            grid: dict = json.load(open("./api/grid.json"))["grid"]
 
             final = grid[loc]
 
