@@ -71,14 +71,16 @@ def generate_response():
         print("Input:", msg)
 
         if "go" in msg:
-            if "living" in msg:
-                final = grid["living"]
+            if "living room" in msg:
+                loc = "living room"
             elif "bathroom" in msg:
-                final = grid["bathroom"]
+                loc = "bathroom"
             elif "study" in msg:
-                final = grid["study"]
-            elif "kitchen" in msg:
-                final = grid["kitchen"]
+                loc = "study"
+            else:
+                loc = "kitchen"
+
+            final = grid[loc]
 
 
             d = math.dist(position, final)
@@ -102,9 +104,9 @@ def generate_response():
             a = 90-a
             
             print("Movement command")
-            print({"position": str(final), "bearing": a, "distance": d, "move": True})
+            print({"location": loc, "position": str(final), "bearing": a, "distance": d, "move": True})
 
-            return {"position": str(final), "bearing": a, "distance": d, "move": True}
+            return {"location": loc, "position": str(final), "bearing": a, "distance": d, "move": True}
 
         output = answer_prompt(msg)
         print("Output:", output)
@@ -114,7 +116,7 @@ def generate_response():
         output = "Sorry, I didn't get that. Can you say that again?"
 
     print({"message": output, "move": False})
-    
+
     return {"message": output, "move": False}
 
 if __name__ == "__main__":
