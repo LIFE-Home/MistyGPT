@@ -116,7 +116,7 @@ def generate_response():
                 else:
                     a = a1
             
-            a = 90-a
+            a = (90-a)%360
             
             print("Movement command")
             print({"location": loc, "position": str(final), "bearing": a, "distance": d, "move": True})
