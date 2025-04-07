@@ -78,7 +78,22 @@ def generate_response():
             else:
                 loc = "kitchen"
 
-            grid: dict = json.load(open("./api/grid.json"))["grid"]
+            grid_file: dict = json.load(open("./api/grid.json"))
+            grid = grid_file["grid"]
+            aliases = grid_file["aliases"]
+
+            flag = False
+            for key in grid:
+                if key in msg:
+                    loc = key
+                    flag = True
+                    break
+            
+            if not flag:
+                for key in aliases:
+                    if key in msg:
+                        loc = aliases[key]
+                        break
 
             final = grid[loc]
 

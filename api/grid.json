@@ -4,5 +4,8 @@
         "kitchen": [0, 1],
         "bathroom": [1, 0],
         "study": [1, 1]
+    },
+    "aliases": {
+        "living": "living room"
     }
 }
