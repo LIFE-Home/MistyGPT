@@ -99,24 +99,28 @@ def generate_response():
 
 
             d = math.dist(position, final)
-            x = final[0]-position[0]
-            y = final[1]-position[1]
 
-            a1 = math.degrees(math.acos(x/d))
-            a2 = math.degrees(math.asin(y/d))
-
-            if a1 * a2 > 0:
-                if a1 > 0:
-                    a = a1
-                else:
-                    a = 360 - a1
+            if d == 0:
+                a = 0
             else:
-                if a1 > 0:
-                    a = 360 - a1
+                x = final[0]-position[0]
+                y = final[1]-position[1]
+
+                a1 = math.degrees(math.acos(x/d))
+                a2 = math.degrees(math.asin(y/d))
+
+                if a1 * a2 > 0:
+                    if a1 > 0:
+                        a = a1
+                    else:
+                        a = 360 - a1
                 else:
-                    a = a1
-            
-            a = (90-a)%360
+                    if a1 > 0:
+                        a = 360 - a1
+                    else:
+                        a = a1
+                
+                a = (90-a)%360
             
             print("Movement command")
             print({"location": loc, "position": str(final), "bearing": a, "distance": d, "move": True})
