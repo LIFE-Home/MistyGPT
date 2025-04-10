@@ -4,11 +4,12 @@
   "Description": "Integrating ChatGPT into the Misty Robot",
   "StartupRules": [
     "Manual",
-    "Robot"
+    "Robot",
+    "Startup"
   ],
   "Language": "javascript",
   "BroadcastMode": "verbose",
-  "TimeoutInSeconds": 600,
+  "TimeoutInSeconds": 1800,
   "CleanupOnCancel": true,
   "WriteToLog": false,
   "Parameters": {
