@@ -1,11 +1,11 @@
 {
     "grid": {
         "living room": [0, 0],
-        "kitchen": [1, 1],
-        "bathroom": [2, 1],
-        "study": [3, 0],
-        "garage": [2, -1],
-        "garden": [1, -1]
+        "kitchen": [0.5, 0.5],
+        "bathroom": [1, 0.5],
+        "study": [1.5, 0],
+        "garage": [1, -0.5],
+        "garden": [0.5, -0.5]
     },
     "aliases": {
         "living": "living room"
