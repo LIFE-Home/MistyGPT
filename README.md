@@ -12,6 +12,7 @@
 │
 ├───api
 │       app.py
+│       grid.json
 │       guides.json
 │
 └───src
@@ -24,6 +25,8 @@
 - `api/app.py`: Main file for running the API (hosted on Vercel)
 
 - `api/guides.json`: Editable file to customize prompt to the GPT
+
+- `api/grid.json`: Editable file to modify locations for navigation
 
 - `src/MistyGPT.js`: JavaScript wrapper for controlling the interactions between the robot and the API
 
@@ -57,9 +60,7 @@
 
 - To modify the locations used in voice-controlled navigation, you can edit the `api/grid.json` file
 
-- The code switches to navigation mode when it hears the **go** keyword, and searches the JSON file for the presence of a key or alias in the user input
-
-- If found, the robot uses its current location and bearing to automatically calculate the distance and direction in which it should travel
+- The code switches to navigation mode when it hears the **go** keyword, and searches the JSON file for the presence of a key or alias in the user input. If detected, it will use its current position and destination to automatically calculate the distance and direction in which it should travel
 
 - Commit the code and push it to GitHub, and then sync the code in the hosting fork to reflect the change in the skill
 
