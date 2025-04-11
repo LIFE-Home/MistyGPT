@@ -55,6 +55,12 @@
 
 - When adding a new guide phrase, add a new key-value pair to the JSON file, where the key is the guide phrase to be detected, and the value is the associated prompt. If you wish to substitute the user input at any point in the prompt, use `{prompt}` in the appropriate location
 
+- To modify the locations used in voice-controlled navigation, you can edit the `api/grid.json` file
+
+- The code switches to navigation mode when it hears the **go** keyword, and searches the JSON file for the presence of a key or alias in the user input
+
+- If found, the robot uses its current location and bearing to automatically calculate the distance and direction in which it should travel
+
 - Commit the code and push it to GitHub, and then sync the code in the hosting fork to reflect the change in the skill
 
 ### Contributors
