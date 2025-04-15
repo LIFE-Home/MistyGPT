@@ -8,7 +8,7 @@
 │   .gitignore
 │   README.md
 │   requirements.txt
-│   vercel.json   
+│   vercel.json
 │
 ├───api
 │       app.py
@@ -16,8 +16,13 @@
 │       guides.json
 │
 └───src
-        MistyGPT.js
-        MistyGPT.json
+    ├───MistyGPT
+    │       MistyGPT.js
+    │       MistyGPT.json
+    │
+    └───MistyMoov
+            MistyMoov.js
+            MistyMoov.json
 ```
 
 ### Important components
@@ -28,9 +33,13 @@
 
 - `api/grid.json`: Editable file to modify locations for navigation
 
-- `src/MistyGPT.js`: JavaScript wrapper for controlling the interactions between the robot and the API
+- `src/MistyGPT/MistyGPT.js`: JavaScript wrapper for controlling the interactions between the robot and the API for the MistyGPT skill
 
-- `src/MistyGPT.json`: Metadata for the MistyGPT skill
+- `src/MistyGPT/MistyGPT.json`: Metadata for the MistyGPT skill
+
+- `src/MistyMoov/MistyMoov.js`: JavaScript wrapper for controlling the interactions between the robot and the API for the MistyMoov skill
+
+- `src/MistyMoov/MistyMoov.json`: Metadata for the MistyMoov skill
 
 - `requirements.txt`: List of Python dependencies for the API
 
@@ -48,6 +57,8 @@
 
 - To run the skill, visit the **Programming > Skill Management** section of the Misty dashboard and select the **Start** option for **MistyGPT**
 
+- **Optional**: Although MistyMoov is packaged within MistyGPT, it can also be run independently using its standalone skill using the same method as outlined above
+
 - Prefix your query with **Hey, Misty**, wait till you hear a chime and a glowing blue LED from its helmet, and then ask your query
 
 ### Modifying the skill
@@ -61,6 +72,8 @@
 - To modify the locations used in voice-controlled navigation, you can edit the `api/grid.json` file
 
 - The code switches to navigation mode when it hears the **go** keyword, and searches the JSON file for the presence of a key or alias in the user input. If detected, it will use its current position and destination to automatically calculate the distance and direction in which it should travel
+
+- The MistyMoov skills works exactly as outlined above, except that it does not depend on the existence of the **go** keyword, since navigation is its sole purpose
 
 - Commit the code and push it to GitHub, and then sync the code in the hosting fork to reflect the change in the skill
 
