@@ -1,20 +1,20 @@
 {
-  "Name": "MistyGPT",
-  "UniqueId": "b1ed4ab4-4091-437e-9479-ac9ef1d890e5",
-  "Description": "Integrating ChatGPT into the Misty Robot",
-  "StartupRules": [
-    "Manual",
-    "Robot",
-    "Startup"
-  ],
-  "Language": "javascript",
-  "BroadcastMode": "verbose",
-  "TimeoutInSeconds": 1800,
-  "CleanupOnCancel": true,
-  "WriteToLog": false,
-  "Parameters": {
-    "int": 10,
-    "double": 20.5,
-    "string": "twenty"
-  }
+    "Name": "MistyGPT",
+    "UniqueId": "b1ed4ab4-4091-437e-9479-ac9ef1d890e5",
+    "Description": "A GPT wrapper that allows users to converse with Misty",
+    "StartupRules": [
+        "Manual",
+        "Robot",
+        "Startup"
+    ],
+    "Language": "javascript",
+    "BroadcastMode": "verbose",
+    "TimeoutInSeconds": 1800,
+    "CleanupOnCancel": true,
+    "WriteToLog": false,
+    "Parameters": {
+		"int": 10,
+		"double": 20.5,
+		"string": "twenty"
+    }
 }

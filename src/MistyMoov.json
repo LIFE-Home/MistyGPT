@@ -1,0 +1,19 @@
+{
+    "Name": "MistyMoov",
+    "UniqueId": "672fe206-ce77-41a2-a66e-7d1a87a9ef04",
+    "Description": "A voice-controlled navigation interface for Misty",
+    "StartupRules": [
+        "Manual",
+        "Robot"
+    ],
+    "Language": "javascript",
+    "BroadcastMode": "verbose",
+    "TimeoutInSeconds": 600,
+    "CleanupOnCancel": true,
+    "WriteToLog": false,
+    "Parameters": {
+        "int": 10,
+        "double": 20.5,
+        "string": "twenty"
+    }
+}

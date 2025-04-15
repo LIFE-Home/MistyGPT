@@ -14,7 +14,18 @@ app = Flask(__name__)
 def index():
     return '<marquee direction="right"><h1>The MistyGPT API is up and running!</h1></marquee>'
 
-def answer_prompt(prompt):
+def extract_text(audio: dict):
+    rec = sr.Recognizer()
+    
+    file = io.BytesIO(base64.b64decode(audio["audio"]))
+
+    with sr.AudioFile(file) as audio_file:
+        data = rec.record(audio_file)
+
+    msg = rec.recognize_google(data).lower()
+    return msg
+
+def answer_prompt(prompt: str):
     openai_client = openai.OpenAI(
         api_key = os.getenv("OPENAI_API_KEY")
     )
@@ -52,80 +63,70 @@ def answer_prompt(prompt):
 
     return response.choices[0].message.content
 
+def navigate_robot(prompt: str, position: list):
+    grid_file: dict = json.load(open("./api/grid.json"))
+    grid = grid_file["grid"]
+    aliases = grid_file["aliases"]
+
+    flag = False
+    for key in grid:
+        if key in prompt:
+            loc = key
+            flag = True
+            break
+    
+    if not flag:
+        for key in aliases:
+            if key in prompt:
+                loc = aliases[key]
+                break
+
+    final = grid[loc]
+
+    d = math.dist(position, final)
+
+    if d == 0:
+        a = 0
+    else:
+        x = final[0]-position[0]
+        y = final[1]-position[1]
+
+        a1 = math.degrees(math.acos(x/d))
+        a2 = math.degrees(math.asin(y/d))
+
+        if a1 * a2 > 0:
+            if a1 > 0:
+                a = a1
+            else:
+                a = 360 - a1
+        else:
+            if a1 > 0:
+                a = 360 - a1
+            else:
+                a = a1
+        
+        a = (90-a)%360
+    
+    return {"location": loc, "position": str(final), "bearing": a, "distance": d}
+
 @app.route("/generate-response", methods = ["POST"])
 def generate_response():
-    rec = sr.Recognizer()
-
     audio = request.get_json()
-    
-    file = io.BytesIO(base64.b64decode(audio["audio"]))
+
     position = eval(audio["position"])
 
-    with sr.AudioFile(file) as audio:
-        data = rec.record(audio)
-
     try:
-        msg = rec.recognize_google(data).lower()
+        msg = extract_text(audio)
         print("Input:", msg)
 
         if "go" in msg:
-            if "living" in msg:
-                loc = "living room"
-            elif "bathroom" in msg:
-                loc = "bathroom"
-            elif "study" in msg:
-                loc = "study"
-            else:
-                loc = "kitchen"
-
-            grid_file: dict = json.load(open("./api/grid.json"))
-            grid = grid_file["grid"]
-            aliases = grid_file["aliases"]
-
-            flag = False
-            for key in grid:
-                if key in msg:
-                    loc = key
-                    flag = True
-                    break
-            
-            if not flag:
-                for key in aliases:
-                    if key in msg:
-                        loc = aliases[key]
-                        break
-
-            final = grid[loc]
-
-
-            d = math.dist(position, final)
-
-            if d == 0:
-                a = 0
-            else:
-                x = final[0]-position[0]
-                y = final[1]-position[1]
-
-                a1 = math.degrees(math.acos(x/d))
-                a2 = math.degrees(math.asin(y/d))
-
-                if a1 * a2 > 0:
-                    if a1 > 0:
-                        a = a1
-                    else:
-                        a = 360 - a1
-                else:
-                    if a1 > 0:
-                        a = 360 - a1
-                    else:
-                        a = a1
-                
-                a = (90-a)%360
+            data = navigate_robot(msg, position)
+            data["move"] = True
             
             print("Movement command")
-            print({"location": loc, "position": str(final), "bearing": a, "distance": d, "move": True})
+            print(data)
 
-            return {"location": loc, "position": str(final), "bearing": a, "distance": d, "move": True}
+            return data
 
         output = answer_prompt(msg)
         print("Output:", output)
@@ -137,6 +138,30 @@ def generate_response():
     print({"message": output, "move": False})
 
     return {"message": output, "move": False}
+
+@app.route("/move-robot", methods = ["POST"])
+def move_robot():
+    audio = request.get_json()
+
+    position = eval(audio["position"])
+
+    try:
+        msg = extract_text(audio)
+        print("Input:", msg)
+
+        data = navigate_robot(msg, position)
+
+        print(data)
+
+        return data
+    except Exception as e:
+        print("Error:", e)
+        print("Traceback:", str(e.with_traceback(e.__traceback__)))
+        output = "Sorry, I didn't get that. Can you say that again?"
+
+    print({"message": output})
+
+    return {"message": output}
 
 if __name__ == "__main__":
     app.run(debug = True)
