@@ -57,7 +57,7 @@
 
 - To run the skill, visit the **Programming > Skill Management** section of the Misty dashboard and select the **Start** option for **MistyGPT**
 
-- **Optional**: Although MistyMoov is packaged within MistyGPT, it can also be run independently using its standalone skill using the same method as outlined above
+- **Optional**: Although MistyMoov is packaged within MistyGPT, it can also be run independently with its standalone skill using the same method as outlined above
 
 - Prefix your query with **Hey, Misty**, wait till you hear a chime and a glowing blue LED from its helmet, and then ask your query
 
@@ -73,7 +73,7 @@
 
 - The code switches to navigation mode when it hears the **go** keyword, and searches the JSON file for the presence of a key or alias in the user input. If detected, it will use its current position and destination to automatically calculate the distance and direction in which it should travel
 
-- The MistyMoov skills works exactly as outlined above, except that it does not depend on the existence of the **go** keyword, since navigation is its sole purpose
+- The MistyMoov skills works exactly as outlined above, except that it does not depend on the existence of the **go** keyword, since navigation is its sole purpose, which also implies that it will not respond to any other prompts
 
 - Commit the code and push it to GitHub, and then sync the code in the hosting fork to reflect the change in the skill
 
