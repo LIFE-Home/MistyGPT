@@ -4,6 +4,10 @@ misty.Set("bearing", 0);
 function startListening() {
     misty.RegisterEvent("KeyPhraseRecognized","KeyPhraseRecognized", 10, false);
 
+    misty.AddReturnProperty("BumpSensor", "Pose");
+    misty.AddReturnProperty("BumpSensor", "IsContacted");
+    misty.RegisterEvent("BumpSensor", "BumpSensor", 10, false);
+
     misty.StartKeyPhraseRecognition();
 
     misty.Debug("Started listening for key phrase");
@@ -19,11 +23,23 @@ function _KeyPhraseRecognized() {
     misty.Debug("Started recording data");
 }
 
+function _BumpSensor(data) {
+    let frameId = data.AdditionalResults[0].FrameId;
+    let success = data.AdditionalResults[1];
+
+    if (success && frameId == "RobotBaseCenter") {
+        misty.Debug("Returning to bearing 0");
+        misty.DriveArc(0, 0, 3000, false);
+    }
+
+    startListening();
+}
+
 function _VoiceRecord(data) {
-    var audioFileName = data.AdditionalResults[0];
-    var success = data.AdditionalResults[1];
-    var errorCode = data.AdditionalResults[2];
-    var errorMessage = data.AdditionalResults[3];
+    let audioFileName = data.AdditionalResults[0];
+    let success = data.AdditionalResults[1];
+    let errorCode = data.AdditionalResults[2];
+    let errorMessage = data.AdditionalResults[3];
 
     if (success) {
         misty.Debug("Successfully captured speech to " + audioFileName);
@@ -35,14 +51,14 @@ function _VoiceRecord(data) {
 }
 
 function sendAudio(data) {
-    var audio = data.Result.Base64;
+    let audio = data.Result.Base64;
 
-    var url = "https://misty-gpt-zeta.vercel.app/move-robot";
+    let url = "https://misty-gpt-zeta.vercel.app/move-robot";
     misty.SendExternalRequest("POST", url, null, null, JSON.stringify({"audio": audio, "position": misty.Get("position"), "bearing": misty.Get("bearing")}), false, false, null, "application/json");
 }
 
 function _SendExternalRequest(data) {
-    var response = JSON.parse(data.Result.ResponseObject.Data);
+    let response = JSON.parse(data.Result.ResponseObject.Data);
     
     if ("message" in response) {
         misty.Speak(response.message, true);

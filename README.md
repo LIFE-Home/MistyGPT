@@ -61,6 +61,10 @@
 
 - Prefix your query with **Hey, Misty**, wait till you hear a chime and a glowing blue LED from its helmet, and then ask your query
 
+- If using MistyMoov within MistyGPT, use the keyword **go** to switch to navigation mode and make the robot move to the specified location. This keyword is not required if MistyMoov is used independently
+
+- Press the front sensors to make Misty turn back to bearing 0 as specified by its internal IMU
+
 ### Modifying the skill
 
 - To guide communication in a particular direction, you can edit the `api/guides.json` file
