@@ -27,11 +27,11 @@
 
 ### Important components
 
-- `api/app.py`: Main file for running the API (hosted on Vercel)
-
-- `api/guides.json`: Editable file to customize prompt to the GPT
+- `api/app.py`: Main file for running the API
 
 - `api/grid.json`: Editable file to modify locations for navigation
+
+- `api/guides.json`: Editable file to customize prompt to the GPT
 
 - `src/MistyGPT/MistyGPT.js`: JavaScript wrapper for controlling the interactions between the robot and the API for the MistyGPT skill
 
@@ -59,9 +59,9 @@
 
 - **Optional**: Although MistyMoov is packaged within MistyGPT, it can also be run independently with its standalone skill using the same method as outlined above
 
-- Prefix your query with **Hey, Misty**, wait till you hear a chime and a glowing blue LED from its helmet, and then ask your query
+- Prefix your verbal query with **Hey, Misty**, wait till you hear a chime and a glowing blue LED from its helmet, and then ask your query
 
-- If using MistyMoov within MistyGPT, use the keyword **go** to switch to navigation mode and make the robot move to the specified location. This keyword is not required if MistyMoov is used independently
+- When using MistyMoov within MistyGPT, use the keyword **go** to switch to navigation mode and make the robot move to the specified location. This keyword is not required if MistyMoov is used independently
 
 - Press the front sensors to make Misty turn back to bearing 0 as specified by its internal IMU
 
@@ -77,7 +77,7 @@
 
 - The code switches to navigation mode when it hears the **go** keyword, and searches the JSON file for the presence of a key or alias in the user input. If detected, it will use its current position and destination to automatically calculate the distance and direction in which it should travel
 
-- The MistyMoov skills works exactly as outlined above, except that it does not depend on the existence of the **go** keyword, since navigation is its sole purpose, which also implies that it will not respond to any other prompts
+- The MistyMoov skill works exactly as outlined above, except that it does not depend on the existence of the **go** keyword, since navigation is its sole purpose, which also implies that it will not respond to any other prompts
 
 - Commit the code and push it to GitHub, and then sync the code in the hosting fork to reflect the change in the skill
 

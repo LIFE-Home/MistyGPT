@@ -30,6 +30,7 @@ function _BumpSensor(data) {
     if (success && frameId == "RobotBaseCenter") {
         misty.Debug("Returning to bearing 0");
         misty.DriveArc(0, 0, 3000, false);
+        misty.Set("bearing", 0);
     }
 
     startListening();
