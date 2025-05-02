@@ -17,10 +17,6 @@ jobs:
           git remote add upstream https://github.com/lifehome-illinois/MistyGPT.git
           git fetch upstream
 
-          git checkout -b feature/x origin/feature/x
-          git merge --no-edit upstream/feature/x
-          git push origin feature/x
-
           git checkout main
           git merge --no-edit upstream/main
           git push origin main
