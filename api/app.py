@@ -116,10 +116,10 @@ def generate_response():
     position = eval(audio["position"])
 
     try:
-        msg = extract_text(audio)
+        msg: str = extract_text(audio)
         print("Input:", msg)
 
-        if "go" in msg:
+        if msg.startswith("go"):
             data = navigate_robot(msg, position)
             data["move"] = True
             
