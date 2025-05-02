@@ -81,6 +81,45 @@
 
 - Commit the code and push it to GitHub, and then sync the code in the hosting fork to reflect the change in the skill
 
+### Testing the skill locally
+
+- To test the skill locally, first clone the repository with:
+
+```console
+git clone https://github.com/lifehome-illinois/MistyGPT.git
+```
+
+- Navigate into the cloned repository and create a virtual environment with the following commands:
+
+    - Windows:
+    ```
+    python -m venv .venv
+    .venv\Scripts\activate
+    ```
+
+    - Mac/Linux:
+    ```console
+    python3 -m venv .venv
+    . .venv/bin/activate
+    ```
+
+- Install the required dependencies using the following commands:
+
+```console
+pip install -r requirements.txt
+pip install python-dotenv
+```
+
+- Create a `.env` file in the `api` folder with the following format:
+
+```console
+OPENAI_API_KEY = <your OPENAI API key>
+```
+
+- Uncomment lines 11-13 in `api/app.py` before running the API locally
+
+- **Note**: In order to allow Misty to access the API running on `localhost`, you will have to use some sort of an API gateway like [ngrok](https://ngrok.com/) and change the `url` variables in the `src/MistyGPT/MistyGPT.js` and `src/MistyMoov/MistyMoov.js` files appropriately
+
 ### Contributors
 
 - Srivishnu Vusirikala ([@vsmart-06](https://github.com/vsmart-06))
