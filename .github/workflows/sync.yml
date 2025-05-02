@@ -1,4 +1,4 @@
-name: Merge upstream branches
+name: Sync fork
 on:
   schedule:
     - cron:  '* * * * *'
