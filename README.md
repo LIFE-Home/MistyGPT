@@ -92,7 +92,7 @@ git clone https://github.com/lifehome-illinois/MistyGPT.git
 - Navigate into the cloned repository and create a virtual environment with the following commands:
 
     - Windows:
-    ```
+    ```console
     python -m venv .venv
     .venv\Scripts\activate
     ```
