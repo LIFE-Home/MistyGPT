@@ -51,7 +51,7 @@
 
 - The API URL for sending requests is located [here](https://misty-gpt-zeta.vercel.app)
 
-- A GitHub workflow has been set up to automatically sync new changes from the original reposity to the hosting fork. However, if something does not seem to be working as expected, make sure that the changes are reflected in the hosting fork, especially for changes made to the API. If the changes are not visible, simply update the fork manually.
+- A GitHub workflow has been set up to automatically sync new changes from the original reposity to the hosting fork. However, if something does not seem to be working as expected, make sure that the changes are reflected in the hosting fork, especially for changes made to the API. If the changes are not visible, simply update the fork manually
 
 ### Using the skill
 
