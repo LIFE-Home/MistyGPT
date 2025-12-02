@@ -51,7 +51,9 @@
 
 - The API URL for sending requests is located [here](https://misty-gpt-zeta.vercel.app)
 
-- A GitHub workflow has been set up to automatically sync new changes from the original repository to the hosting fork. However, if something does not seem to be working as expected, make sure that the changes are reflected in the hosting fork, especially for changes made to the API. If the changes are not visible, simply update the fork manually
+- The GitHub account used for the hosting fork is connected to the mklifehome@gmail.com email and this GitHub account can be used to log in to Vercel as well
+
+- A GitHub workflow has been set up to automatically sync new changes from the original repository to the hosting fork. However, if something does not seem to be working as expected, make sure that the changes are reflected in the hosting fork, especially for changes made to the API. If the changes are not visible, simply update the fork manually. **Note**: GitHub also disables this workflow after 60 days of inactivity so it will have to be re-enabled manually if this occurs
 
 ### Using the skill
 
@@ -73,7 +75,7 @@
 
 - When adding a new guide phrase, add a new key-value pair to the JSON file, where the key is the guide phrase to be detected, and the value is the associated prompt. If you wish to substitute the user input at any point in the prompt, use `{prompt}` in the appropriate location
 
-- To modify the locations used in voice-controlled navigation, you can edit the `api/grid.json` file
+- To modify the locations used in voice-controlled navigation, you can edit the `api/grid.json` file. **Note**: All dimensions are in metres
 
 - The code switches to navigation mode when it hears the **go** keyword, and searches the JSON file for the presence of a key or alias in the user input. If detected, it will use its current position and destination to automatically calculate the distance and direction in which it should travel
 
@@ -118,7 +120,7 @@ OPENAI_API_KEY = <your OPENAI API key>
 
 - Uncomment lines 11-13 in `api/app.py` before running the API locally
 
-- **Note**: In order to allow Misty to access the API running on `localhost`, you will have to use some sort of an API gateway like [ngrok](https://ngrok.com/) and change the `url` variables in the `src/MistyGPT/MistyGPT.js` and `src/MistyMoov/MistyMoov.js` files appropriately
+- **Note**: In order to allow Misty to access the API running on `localhost`, you will have to use some sort of an API gateway like [ngrok](https://ngrok.com/) and change the `url` variable in the `sendAudio()` function in the `src/MistyGPT/MistyGPT.js` and `src/MistyMoov/MistyMoov.js` files appropriately
 
 ### Contributors
 
