@@ -118,7 +118,7 @@ OPENAI_API_KEY = <your OPENAI API key>
 
 - Uncomment lines 11-13 in `api/app.py` before running the API locally
 
-- **Note**: In order to allow Misty to access the API running on `localhost`, you will have to use some sort of an API gateway like [ngrok](https://ngrok.com/) and change the `url` variables in the `src/MistyGPT/MistyGPT.js` and `src/MistyMoov/MistyMoov.js` files appropriately
+- **Note**: In order to allow Misty to access the API running on `localhost`, you will have to use some sort of an API gateway like [ngrok](https://ngrok.com/) and change the `url` variable in the `sendAudio()` function in the `src/MistyGPT/MistyGPT.js` and `src/MistyMoov/MistyMoov.js` files appropriately
 
 ### Contributors
 
