@@ -53,7 +53,7 @@
 
 - The GitHub account used for the hosting fork is connected to the mklifehome@gmail.com email and this GitHub account can be used to log in to Vercel as well
 
-- A GitHub workflow has been set up to automatically sync new changes from the original repository to the hosting fork. However, if something does not seem to be working as expected, make sure that the changes are reflected in the hosting fork, especially for changes made to the API. If the changes are not visible, simply update the fork manually. **Note**: GitHub also disables this workflow after 60 days of inactivity so it will need to be re-enabled manually if this occurs
+- A GitHub workflow has been set up to automatically sync new changes from the original repository to the hosting fork. However, if something does not seem to be working as expected, make sure that the changes are reflected in the hosting fork, especially for changes made to the API. If the changes are not visible, simply update the fork manually. **Note**: GitHub also disables this workflow after 60 days of inactivity so it will have to be re-enabled manually if this occurs
 
 ### Using the skill
 
